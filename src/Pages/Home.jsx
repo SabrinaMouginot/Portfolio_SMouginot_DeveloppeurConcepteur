@@ -1,5 +1,10 @@
+import Menu from "../Components/Menu/Menu";
+
 const Home = () => {
-  return <h1>Accueil</h1>;
+  return (
+    <Menu />
+    // <h1>Accueil</h1>;
+  )
 };
 
 export default Home;
