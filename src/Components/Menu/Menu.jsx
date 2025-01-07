@@ -2,7 +2,9 @@ import './Menu.css';
 
 const Menu = () => {
     return (
-        <div></div>
+        <div className="menu">
+            <p>X</p>
+        </div>
     );
 };
 
