@@ -1,9 +1,11 @@
 import Menu from "../Components/Menu/Menu";
+import "../Components/Menu/Menu.css";
 
 const Home = () => {
   return (
-    <Menu />
-    // <h1>Accueil</h1>;
+    <div>
+      <Menu />
+    </div>
   )
 };
 
