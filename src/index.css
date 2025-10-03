@@ -1,23 +1,55 @@
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+/* Réinitialisation */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.project-card {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: white;
-  text-align: left;
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e1b2e; /* bleu nuit très foncé */
+  color: #f0f0f0;            /* texte clair */
+  line-height: 1.6;
 }
 
-.project-card h3 {
-  margin-bottom: 0.5rem;
+/* Liens clairs + soulignés au survol */
+a {
+  color: #29fd53;
+  text-decoration: none;
 }
 
-.project-card a {
-  color: #007bff;
+a:hover {
   text-decoration: underline;
+}
+
+/* Sections (utilisées dans toutes les pages) */
+section {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.04); /* léger fond transparent */
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Titres */
+h1, h2, h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+/* Boutons génériques (si tu en ajoutes plus tard) */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #29fd53;
+  color: #1e1b2e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
 }
