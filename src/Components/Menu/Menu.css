@@ -159,10 +159,11 @@ body
 
 /* En haut centré sur les autres pages */
 .menu-wrapper.top {
-  top: 30px;
-  left: 50%;
+  top: -4%;
+  left: 91%;
   transform: translateX(-50%);
 }
+
 
 /* Réduction des marges inutiles quand menu est fermé */
 .menu:not(.active) li {
