@@ -1,60 +1,67 @@
-import { useState } from 'react';
 import './Menu.css';
+import { Link, useLocation } from 'react-router-dom';
 import { IonIcon } from '@ionic/react';
-import { 
-  addOutline, 
-  homeOutline, 
-  personOutline, 
-  settingsOutline, 
-  mailOutline, 
-  videocamOutline, 
-  keyOutline, 
-  gameControllerOutline, 
-  cameraOutline 
+import {
+  addOutline,
+  homeOutline,
+  personOutline,
+  settingsOutline,
+  mailOutline,
+  videocamOutline,
+  keyOutline,
+  gameControllerOutline,
+  cameraOutline
 } from 'ionicons/icons';
 
+import { useState } from 'react';
+
 const Menu = () => {
-  const [isActive, setIsActive] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsActive(!isActive);
-  };
-
-  const handleItemClick = (index) => {
-    setActiveIndex(index);
-  };
-
-  const icons = [
-    homeOutline,
-    personOutline,
-    settingsOutline,
-    mailOutline,
-    videocamOutline,
-    keyOutline,
-    gameControllerOutline,
-    cameraOutline,
+  const routes = [
+    { to: '/', icon: homeOutline },
+    { to: '/profile', icon: personOutline },
+    { to: '/tech', icon: settingsOutline },
+    { to: '/contact', icon: mailOutline },
+    { to: '/video', icon: videocamOutline },
+    { to: '/keys', icon: keyOutline },
+    { to: '/hobbies', icon: gameControllerOutline },
+    { to: '/gallery', icon: cameraOutline },
   ];
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const isHomePage = location.pathname === '/';
+
   return (
-    <ul className={`menu ${isActive ? 'active' : ''}`}>
-      <div className={`toggle ${isActive ? 'active' : ''}`} onClick={toggleMenu}>
-        <IonIcon icon={addOutline} />
-      </div>
-      {icons.map((icon, index) => (
-        <li
-          key={index}
-          style={{ '--i': index }}
-          className={index === activeIndex ? 'active' : ''}
-          onClick={() => handleItemClick(index)}
-        >
-          <a href="#">
-            <IonIcon icon={icon} />
-          </a>
-        </li>
-      ))}
-      <div className="indicator"></div>
-    </ul>
+    <div className={`menu-wrapper ${isHomePage ? 'centered' : 'top'}`}>
+      <ul className={`menu ${isOpen ? 'active' : ''}`}>
+        <div className={`toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <IonIcon icon={addOutline} />
+        </div>
+
+        {routes.map((route, index) => {
+          const isActive = location.pathname === route.to;
+          return (
+            <li
+              key={index}
+              style={{ '--i': index }}
+              className={isActive ? 'active' : ''}
+              onClick={() => setIsOpen(false)} // ferme le menu au clic
+            >
+              <Link to={route.to}>
+                <IonIcon icon={route.icon} />
+              </Link>
+            </li>
+          );
+        })}
+
+        <div className="indicator"></div>
+      </ul>
+    </div>
   );
 };
 
