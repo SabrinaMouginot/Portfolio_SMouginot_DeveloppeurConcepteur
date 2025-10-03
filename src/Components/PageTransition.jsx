@@ -11,8 +11,8 @@ const PageTransition = ({ children, delay = 0.8 }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: showContent ? 1 : 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
       transition={{ duration: 0.5 }}
     >
       {showContent && children}
