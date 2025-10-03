@@ -1,4 +1,4 @@
-import ProjectCard from '../Components/ProjectCard';
+import ProjectCard from '../Components/ProjectCard/ProjectCard';
 
 const Tech = () => {
   const projects = [
