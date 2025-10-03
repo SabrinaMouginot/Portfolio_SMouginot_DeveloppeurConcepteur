@@ -1,9 +1,13 @@
+import PageTransition from '../Components/PageTransition';
+
 const Gallery = () => {
   return (
-    <section>
-      <h1>Ma galerie photo</h1>
-      <p>Ajout d’un carrousel à venir.</p>
-    </section>
+    <PageTransition>
+      <section>
+        <h1>Ma galerie photo</h1>
+        <p>Ajout d’un carrousel à venir.</p>
+      </section>
+    </PageTransition>
   );
 };
 

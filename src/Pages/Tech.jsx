@@ -1,4 +1,5 @@
 import ProjectCard from '../Components/ProjectCard/ProjectCard';
+import PageTransition from '../Components/PageTransition';
 
 const Tech = () => {
   const projects = [
@@ -30,16 +31,18 @@ const Tech = () => {
   ];
 
   return (
-    <section>
-      <h1>Page technique</h1>
-      <p>Stack : Git, GitHub, JS, Design pattern, Accessibilité, React, Vite, Recharts, MUI, Redux, npm, tests, UML, Figma, etc.</p>
+    <PageTransition>
+      <section>
+        <h1>Page technique</h1>
+        <p>Stack : Git, GitHub, JS, Design pattern, Accessibilité, React, Vite, Recharts, MUI, Redux, npm, tests, UML, Figma, etc.</p>
 
-      <div className="project-grid">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
-        ))}
-      </div>
-    </section>
+        <div className="project-grid">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
+          ))}
+        </div>
+      </section>
+    </PageTransition>
   );
 };
 
