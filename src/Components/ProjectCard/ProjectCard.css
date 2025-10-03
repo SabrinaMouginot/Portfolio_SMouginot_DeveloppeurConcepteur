@@ -1,0 +1,45 @@
+
+/* Adaptation des cartes projets (si pas déjà fait) */
+.project-card {
+  background-color: #2e2a45;
+  color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.project-card a {
+  color: #29fd53;
+}
+
+
+/* *** */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgb(57, 52, 65);
+  text-align: left;
+}
+
+.project-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.project-card a {
+  color: #007bff;
+  text-decoration: underline;
+}

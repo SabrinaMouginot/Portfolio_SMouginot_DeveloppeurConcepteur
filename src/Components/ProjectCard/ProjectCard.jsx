@@ -1,3 +1,4 @@
+import "./ProjectCard.css"
 import PropTypes from 'prop-types';
 
 const ProjectCard = ({ title, description, link }) => {
