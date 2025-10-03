@@ -12,8 +12,8 @@ import {
   gameControllerOutline,
   cameraOutline
 } from 'ionicons/icons';
-
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Menu = () => {
   const location = useLocation();
@@ -36,32 +36,64 @@ const Menu = () => {
 
   const isHomePage = location.pathname === '/';
 
+  // Définition des positions animées
+  const menuVariants = {
+    home: {
+      top: '50%',
+      left: '50%',
+      x: '-50%',
+      y: '-50%',
+      transition: {
+        duration: 0.8,
+        // ease: [0.68, -0.55, 0.27, 1.55] // Bézier incurvé
+      }
+    },
+    page: {
+      top: '0%',
+      left: '90%',
+      x: '-50%',
+      y: '0%',
+      transition: {
+        duration: 0.8,
+        // ease: [0.68, -0.55, 0.27, 1.55]
+      }
+    }
+  };
+
   return (
-    <div className={`menu-wrapper ${isHomePage ? 'centered' : 'top'}`}>
-      <ul className={`menu ${isOpen ? 'active' : ''}`}>
-        <div className={`toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <IonIcon icon={addOutline} />
-        </div>
+    <AnimatePresence>
+      <motion.div
+        className="menu-wrapper"
+        variants={menuVariants}
+        animate={isHomePage ? 'home' : 'page'}
+        initial={false}
+        exit={false}
+      >
+        <ul className={`menu ${isOpen ? 'active' : ''}`}>
+          <div className={`toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+            <IonIcon icon={addOutline} />
+          </div>
 
-        {routes.map((route, index) => {
-          const isActive = location.pathname === route.to;
-          return (
-            <li
-              key={index}
-              style={{ '--i': index }}
-              className={isActive ? 'active' : ''}
-              onClick={() => setIsOpen(false)} // ferme le menu au clic
-            >
-              <Link to={route.to}>
-                <IonIcon icon={route.icon} />
-              </Link>
-            </li>
-          );
-        })}
+          {routes.map((route, index) => {
+            const isActive = location.pathname === route.to;
+            return (
+              <li
+                key={index}
+                style={{ '--i': index }}
+                className={isActive ? 'active' : ''}
+                onClick={() => setIsOpen(false)} // ferme le menu au clic
+              >
+                <Link to={route.to}>
+                  <IonIcon icon={route.icon} />
+                </Link>
+              </li>
+            );
+          })}
 
-        <div className="indicator"></div>
-      </ul>
-    </div>
+          <div className="indicator"></div>
+        </ul>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
