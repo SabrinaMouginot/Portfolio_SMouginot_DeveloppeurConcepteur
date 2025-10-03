@@ -1,21 +1,3 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Home from './Pages/Home';
-
-// function App() {
-//   return (
-//     <Router>
-//       <div>
-//         {/* <Menu /> */}
-//         <Routes>
-//           <Route path="/" element={<Home />} />
-//         </Routes>
-//       </div>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Menu from './Components/Menu/Menu.jsx';
 import Home from './Pages/Home';
