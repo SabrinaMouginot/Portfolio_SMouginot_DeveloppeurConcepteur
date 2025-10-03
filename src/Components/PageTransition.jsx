@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const PageTransition = ({ children, delay = 0.8 }) => {
   const [showContent, setShowContent] = useState(false);
@@ -18,6 +19,11 @@ const PageTransition = ({ children, delay = 0.8 }) => {
       {showContent && children}
     </motion.div>
   );
+};
+
+PageTransition.propTypes = {
+  children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
 };
 
 export default PageTransition;
