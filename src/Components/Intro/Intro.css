@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-
+/* 
 .intro-container {
   position: absolute;
   top: 20px;
@@ -42,4 +42,42 @@
   max-width: 500px;
   white-space: pre-wrap;
   line-height: 1.4;
+} */
+
+.intro-container {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.intro-photo {
+  width: 130px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  object-fit: cover;
+}
+
+.intro-text {
+  font-family: "Bangers", cursive; /* ou Luckiest Guy, Bungee, etc. */
+  font-size: 1.4rem;
+  color: white;
+  max-width: 500px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
