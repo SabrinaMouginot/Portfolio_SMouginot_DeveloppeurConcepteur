@@ -1,4 +1,5 @@
 import './Menu.css';
+import PropTypes from "prop-types";
 import { Link, useLocation } from 'react-router-dom';
 import { IonIcon } from '@ionic/react';
 import {
@@ -12,12 +13,18 @@ import {
   gameControllerOutline,
   cameraOutline
 } from 'ionicons/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Menu = () => {
+const Menu = ({ shouldOpen = false }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (shouldOpen) {
+      setIsOpen(true);
+    }
+  }, [shouldOpen]);
 
   const routes = [
     { to: '/', icon: homeOutline },
@@ -95,6 +102,11 @@ const Menu = () => {
       </motion.div>
     </AnimatePresence>
   );
+};
+
+// Validation des props
+Menu.propTypes = {
+  shouldOpen: PropTypes.bool,
 };
 
 export default Menu;
