@@ -1,73 +1,84 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import "./Intro.css";
-import photo from "../../../public/photo.jpg";
+import { useEffect, useState } from 'react';
+import './Intro.css';
+import photo from '../../../public/photo.jpg'; // remplace par le bon chemin
+import PropTypes from 'prop-types';
 
 const Intro = ({ onIntroEnd }) => {
-  const [displayedWords, setDisplayedWords] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [startTyping, setStartTyping] = useState(false);
+  const textToDisplay = "Bonjour, je suis Sabrina, Développeur concepteur, spécialisée frontend.";
 
-  // On découpe la phrase tout en conservant les ", " pour identifier les pauses
-  const fullText = "Bonjour, je suis Sabrina, Développeur concepteur, spécialisée frontend.";
-  const wordChunks = fullText.split(" ").map((word, idx, arr) => {
-    // Si le mot se termine par une virgule, on insère un saut de ligne après
-    if (word.endsWith(",")) return word + "<br>";
-    return word;
-  });
-
-  // Quand l'image est animée, on démarre l'animation du texte
-  const handlePhotoAnimationComplete = () => {
-    setStartTyping(true);
-  };
+  const [formattedChars, setFormattedChars] = useState([]);
+  const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
-    if (!startTyping || currentIndex >= wordChunks.length) return;
+    // Affiche la photo après un petit délai
+    const imageTimeout = setTimeout(() => {
+      setShowImage(true);
+    }, 500);
 
-    const currentWord = wordChunks[currentIndex];
-
-    const delay = currentWord.endsWith("<br>") ? 1000 : 200; // 1s après les virgules, 200ms sinon
-
-    const timeout = setTimeout(() => {
-      setDisplayedWords((prev) => [...prev, currentWord]);
-      setCurrentIndex((prev) => prev + 1);
-    }, delay);
-
-    return () => clearTimeout(timeout);
-  }, [startTyping, currentIndex, wordChunks]);
+    return () => clearTimeout(imageTimeout);
+  }, []);
 
   useEffect(() => {
-    if (currentIndex === wordChunks.length && onIntroEnd) {
-      const delay = setTimeout(() => {
-        onIntroEnd();
-      }, 300);
-      return () => clearTimeout(delay);
-    }
-  }, [currentIndex, wordChunks.length, onIntroEnd]);
+    if (!showImage) return;
+
+    const chars = textToDisplay.split('');
+    const display = [];
+
+    let delay = 0;
+    let charIndex = 0;
+
+    chars.forEach((char, idx, arr) => {
+      const isCommaSpace = char === ',' && arr[idx + 1] === ' ';
+      const animationDelay = delay;
+
+      if (isCommaSpace) {
+        // Affiche la virgule avec retour à la ligne
+        display.push(
+          <span key={charIndex++} style={{ animationDelay: `${animationDelay}s` }} className="char">
+            {char}
+            <br />
+          </span>
+        );
+
+        // Incrémente la durée d'une pause supplémentaire
+        delay += 1;
+      } else if (char !== ' ' || (arr[idx - 1] !== ',' && arr[idx - 1] !== ' ')) {
+        // Affiche caractère normal (évite de dupliquer les espaces)
+        display.push(
+          <span key={charIndex++} style={{ animationDelay: `${animationDelay}s` }} className="char">
+            {char}
+          </span>
+        );
+      }
+
+      delay += 0.05;
+    });
+
+    setFormattedChars(display);
+
+    // Lancer le menu après toute l'animation
+    const totalDuration = delay * 1000;
+    const endTimeout = setTimeout(() => {
+      onIntroEnd(); // callback vers Home.jsx
+    }, totalDuration + 200); // petit tampon
+
+    return () => clearTimeout(endTimeout);
+  }, [showImage, onIntroEnd]);
 
   return (
     <div className="intro-container">
-      <motion.img
-        src={photo}
-        alt="Portrait de Sabrina"
-        className="intro-photo"
-        initial={{ x: -100, opacity: 0, scale: 0.8 }}
-        animate={{ x: 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        onAnimationComplete={handlePhotoAnimationComplete}
-      />
-
-      <div className="intro-text">
-        <span dangerouslySetInnerHTML={{ __html: displayedWords.join(" ") }} />
-        <span className="cursor">|</span>
-      </div>
+      {showImage && (
+        <div className="intro-content">
+          <img src={photo} alt="Sabrina Mouginot" className="intro-photo" />
+          <p className="typewriter">{formattedChars}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 Intro.propTypes = {
-  onIntroEnd: PropTypes.func,
+  onIntroEnd: PropTypes.func.isRequired,
 };
 
 export default Intro;

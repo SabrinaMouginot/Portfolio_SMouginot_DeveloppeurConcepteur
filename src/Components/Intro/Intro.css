@@ -1,83 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-/* 
+
 .intro-container {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  color: #fff;
-  font-family: 'Bangers', cursive;
-  font-size: 1.4rem;
-  text-shadow: 2px 2px 6px #000;
-  z-index: 900;
-}
-
-.intro-photo {
-  width: 100px;
-  height: 100px;
-  border: 4px solid #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.8s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  filter: contrast(120%) saturate(130%) brightness(1.1);
-}
-
-.intro-photo.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.intro-photo img {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  z-index: 999;
+  background-color: #1e1b2e;
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
 }
 
-.intro-text {
-  max-width: 500px;
-  white-space: pre-wrap;
-  line-height: 1.4;
-} */
-
-.intro-container {
-  position: absolute;
-  top: 40px;
-  left: 40px;
+.intro-content {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 10;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
 .intro-photo {
-  width: 130px;
+  width: 120px;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  object-fit: cover;
+  filter: contrast(1.2) saturate(1.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-.intro-text {
-  font-family: "Bangers", cursive; /* ou Luckiest Guy, Bungee, etc. */
-  font-size: 1.4rem;
+.typewriter {
+  font-family: 'Bangers', cursive; 
+  font-size: 1.5rem;
   color: white;
-  max-width: 500px;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  white-space: pre-line;
+  line-height: 1.5;
 }
 
-.cursor {
-  display: inline-block;
-  width: 1ch;
-  animation: blink 0.8s infinite;
+.char {
+  opacity: 0;
+  animation: appear 0.01s forwards;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
 }
