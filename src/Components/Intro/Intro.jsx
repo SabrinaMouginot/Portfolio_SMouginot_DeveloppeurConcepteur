@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Intro.css';
-import photo from '../../../public/photo.jpg'; // remplace par le bon chemin
+import photo from '/photo.jpg'; 
 import PropTypes from 'prop-types';
 
 const Intro = ({ onIntroEnd }) => {
